@@ -1,0 +1,341 @@
+# OpenClash 纯净模板（保留你的所有规则 + 不覆盖节点 + 兼容AnyTLS）
+mixed-port: 7890
+allow-lan: true
+mode: Rule
+log-level: info
+external-controller: 127.0.0.1:9090
+ui:
+  external-ui: yacd
+  external-name: YACD
+
+# -------------------------- 1. 规则集配置（完整保留你的所有规则地址） --------------------------
+rule-providers:
+  AI1:
+    type: http
+    behavior: classical
+    url: "https://raw.githubusercontent.com/wuse1440197333/githubcangku/refs/heads/main/calsh/AI.list"
+    path: ./rules/AI1.yaml
+    interval: 86400
+
+  AI2:
+    type: http
+    behavior: classical
+    url: "https://raw.githubusercontent.com/wuse1440197333/githubcangku/refs/heads/main/calsh/AI2.list"
+    path: ./rules/AI2.yaml
+    interval: 86400
+
+  GitHub:
+    type: http
+    behavior: classical
+    url: "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/GitHub/GitHub.list"
+    path: ./rules/GitHub.yaml
+    interval: 86400
+
+  TikTok:
+    type: http
+    behavior: classical
+    url: "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/TikTok/TikTok.list"
+    path: ./rules/TikTok.yaml
+    interval: 86400
+
+  Telegram:
+    type: http
+    behavior: classical
+    url: "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/Telegram/Telegram.list"
+    path: ./rules/Telegram.yaml
+    interval: 86400
+
+  # 流媒体规则集（按你的地址完整添加）
+  流媒体-YouTube1:
+    type: http
+    behavior: classical
+    url: "https://raw.githubusercontent.com/liandu2024/clash/refs/heads/main/list/YouTube.list"
+    path: ./rules/流媒体-YouTube1.yaml
+    interval: 86400
+
+  流媒体-YouTube2:
+    type: http
+    behavior: classical
+    url: "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/YouTube/YouTube.list"
+    path: ./rules/流媒体-YouTube2.yaml
+    interval: 86400
+
+  流媒体-HBO:
+    type: http
+    behavior: classical
+    url: "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/HBO/HBO.list"
+    path: ./rules/流媒体-HBO.yaml
+    interval: 86400
+
+  流媒体-Disney:
+    type: http
+    behavior: classical
+    url: "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/Disney/Disney.list"
+    path: ./rules/流媒体-Disney.yaml
+    interval: 86400
+
+  流媒体-Netflix:
+    type: http
+    behavior: classical
+    url: "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/Netflix/Netflix.list"
+    path: ./rules/流媒体-Netflix.yaml
+    interval: 86400
+
+  流媒体-Spotify:
+    type: http
+    behavior: classical
+    url: "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/Spotify/Spotify.list"
+    path: ./rules/流媒体-Spotify.yaml
+    interval: 86400
+
+  # 国外规则集（按你的地址完整添加）
+  国外-Check:
+    type: http
+    behavior: classical
+    url: "https://raw.githubusercontent.com/wuse1440197333/githubcangku/refs/heads/main/calsh/Check.list"
+    path: ./rules/国外-Check.yaml
+    interval: 86400
+
+  国外-Proxy:
+    type: http
+    behavior: classical
+    url: "https://raw.githubusercontent.com/wuse1440197333/githubcangku/refs/heads/main/calsh/Proxy.list"
+    path: ./rules/国外-Proxy.yaml
+    interval: 86400
+
+  国外-Global:
+    type: http
+    behavior: classical
+    url: "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/Global/Global.list"
+    path: ./rules/国外-Global.yaml
+    interval: 86400
+
+# -------------------------- 2. 规则配置（按你的顺序完整保留） --------------------------
+rules:
+  - RULE-SET,AI1,AI1
+  - RULE-SET,AI2,AI2
+  - RULE-SET,GitHub,GitHub
+  - RULE-SET,TikTok,TikTok
+  - RULE-SET,Telegram,Telegram
+  - RULE-SET,流媒体-YouTube1,流媒体
+  - RULE-SET,流媒体-YouTube2,流媒体
+  - RULE-SET,流媒体-HBO,流媒体
+  - RULE-SET,流媒体-Disney,流媒体
+  - RULE-SET,流媒体-Netflix,流媒体
+  - RULE-SET,流媒体-Spotify,流媒体
+  - RULE-SET,国外-Check,国外
+  - RULE-SET,国外-Proxy,国外
+  - RULE-SET,国外-Global,国外
+  - MATCH,国内,DIRECT
+
+# -------------------------- 3. 策略组（完整保留你的所有分组逻辑） --------------------------
+proxy-groups:
+  # 域名组对应策略组
+  - name: "AI1"
+    type: select
+    proxies:
+      - DIRECT
+      - 所有-自动
+      - 港台日新韩-自动
+      - 台日新韩-自动
+      - 香港-自动
+      - 台湾-自动
+      - 日本-自动
+      - 新加坡-自动
+      - 韩国-自动
+      - 美国-自动
+      - 其他-自动
+      - REJECT
+
+  - name: "AI2"
+    type: select
+    proxies:
+      - DIRECT
+      - 所有-自动
+      - 港台日新韩-自动
+      - 台日新韩-自动
+      - 香港-自动
+      - 台湾-自动
+      - 日本-自动
+      - 新加坡-自动
+      - 韩国-自动
+      - 美国-自动
+      - 其他-自动
+      - REJECT
+
+  - name: "GitHub"
+    type: select
+    proxies:
+      - DIRECT
+      - 所有-自动
+      - 港台日新韩-自动
+      - 台日新韩-自动
+      - 香港-自动
+      - 台湾-自动
+      - 日本-自动
+      - 新加坡-自动
+      - 韩国-自动
+      - 美国-自动
+      - 其他-自动
+      - REJECT
+
+  - name: "TikTok"
+    type: select
+    proxies:
+      - DIRECT
+      - 所有-自动
+      - 港台日新韩-自动
+      - 台日新韩-自动
+      - 香港-自动
+      - 台湾-自动
+      - 日本-自动
+      - 新加坡-自动
+      - 韩国-自动
+      - 美国-自动
+      - 其他-自动
+      - REJECT
+
+  - name: "Telegram"
+    type: select
+    proxies:
+      - DIRECT
+      - 所有-自动
+      - 港台日新韩-自动
+      - 台日新韩-自动
+      - 香港-自动
+      - 台湾-自动
+      - 日本-自动
+      - 新加坡-自动
+      - 韩国-自动
+      - 美国-自动
+      - 其他-自动
+      - REJECT
+
+  - name: "流媒体"
+    type: select
+    proxies:
+      - DIRECT
+      - 所有-自动
+      - 港台日新韩-自动
+      - 台日新韩-自动
+      - 香港-自动
+      - 台湾-自动
+      - 日本-自动
+      - 新加坡-自动
+      - 韩国-自动
+      - 美国-自动
+      - 其他-自动
+      - REJECT
+
+  - name: "国外"
+    type: select
+    proxies:
+      - DIRECT
+      - 所有-自动
+      - 港台日新韩-自动
+      - 台日新韩-自动
+      - 香港-自动
+      - 台湾-自动
+      - 日本-自动
+      - 新加坡-自动
+      - 韩国-自动
+      - 美国-自动
+      - 其他-自动
+      - REJECT
+
+  - name: "国内"
+    type: select
+    proxies:
+      - DIRECT
+      - 所有-自动
+      - 港台日新韩-自动
+      - 台日新韩-自动
+      - 香港-自动
+      - 台湾-自动
+      - 日本-自动
+      - 新加坡-自动
+      - 韩国-自动
+      - 美国-自动
+      - 其他-自动
+      - REJECT
+
+  # 节点自动组（按你的正则过滤，兼容AnyTLS节点）
+  - name: "所有-自动"
+    type: url-test
+    url: "http://www.gstatic.com/generate_204"
+    interval: 180
+    timeout: 5000
+    tolerance: 100
+    filter: ".*"
+
+  - name: "港台日新韩-自动"
+    type: url-test
+    url: "http://www.gstatic.com/generate_204"
+    interval: 180
+    timeout: 5000
+    tolerance: 100
+    filter: "(广港|广台|广日|广新|广韩|广美|香港|HK|Hong Kong|HongKong|台湾|TW|Tai Wan|TaiWan|Taiwan|日本|JP|川日|东京|大阪|泉日|埼玉|沪日|深日|Japan|新加坡|SG|坡|狮城|Singapore|韩国|KR|首尔|春川|Korea)"
+
+  - name: "台日新韩-自动"
+    type: url-test
+    url: "http://www.gstatic.com/generate_204"
+    interval: 180
+    timeout: 5000
+    tolerance: 100
+    filter: "(台湾|TW|Tai Wan|TaiWan|Taiwan|日本|JP|川日|东京|大阪|泉日|埼玉|沪日|深日|Japan|新加坡|SG|坡|狮城|Singapore|韩国|KR|首尔|春川|Korea)"
+
+  - name: "香港-自动"
+    type: url-test
+    url: "http://www.gstatic.com/generate_204"
+    interval: 180
+    timeout: 5000
+    tolerance: 100
+    filter: "(广港|香港|HK|Hong Kong|HongKong)"
+
+  - name: "台湾-自动"
+    type: url-test
+    url: "http://www.gstatic.com/generate_204"
+    interval: 180
+    timeout: 5000
+    tolerance: 100
+    filter: "(广台|台湾|TW|Tai Wan|TaiWan|Taiwan)"
+
+  - name: "日本-自动"
+    type: url-test
+    url: "http://www.gstatic.com/generate_204"
+    interval: 180
+    timeout: 5000
+    tolerance: 100
+    filter: "(广日|日本|JP|川日|东京|大阪|泉日|埼玉|沪日|深日|Japan)"
+
+  - name: "新加坡-自动"
+    type: url-test
+    url: "http://www.gstatic.com/generate_204"
+    interval: 180
+    timeout: 5000
+    tolerance: 100
+    filter: "(广新|新加坡|SG|坡|狮城|Singapore)"
+
+  - name: "韩国-自动"
+    type: url-test
+    url: "http://www.gstatic.com/generate_204"
+    interval: 180
+    timeout: 5000
+    tolerance: 100
+    filter: "(广韩|韩国|KR|首尔|春川|Korea)"
+
+  - name: "美国-自动"
+    type: url-test
+    url: "http://www.gstatic.com/generate_204"
+    interval: 180
+    timeout: 5000
+    tolerance: 100
+    filter: "(广美|美国|US|纽约|波特兰|达拉斯|俄勒冈|凤凰城|硅谷|拉斯维加斯|圣何塞|圣克拉|西雅|芝加|United States)"
+
+  - name: "其他-自动"
+    type: url-test
+    url: "http://www.gstatic.com/generate_204"
+    interval: 180
+    timeout: 5000
+    tolerance: 100
+    filter: ".*(波|柬|尼|也|克|比|尔|立|冰|秘|耳|利|埃|希|孟|芬|爱|澳|德|南|意|法|拿|墨|印|越|瑞|智|荷|比|巴|沙|泰|德|烏|以|Australia|Konghwaguk)"
