@@ -5,8 +5,8 @@ mode: Rule
 log-level: info
 external-controller: 127.0.0.1:9090
 ui:
-  external-ui: yacd
-  external-name: YACD
+  external-ui: yacd  
+  external-name: YACD  
 
 # -------------------------- 1. 规则集配置（完整保留你的所有规则地址） --------------------------
 rule-providers:
